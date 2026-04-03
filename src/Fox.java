@@ -1,5 +1,5 @@
 public class Fox {
-    static int foxeat(int chickeneat, int eggs, boolean close){
+    public int foxeat(int chickeneat, int eggs, boolean close){
         chickeneat = Main.rnd.nextInt(1, 4);
         if(eggs <= 0){
             close = false;

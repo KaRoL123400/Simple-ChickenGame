@@ -1,6 +1,6 @@
 public class DaySys {
 
-    static void nextDay(int saturation, boolean close, int sellgg, int eggs, int chickeneat, int foxCh){
+    public void nextDay(int saturation, boolean close, int sellgg, int eggs, int chickeneat, int foxCh){
 
         System.out.println("Next day!");
 
@@ -24,7 +24,7 @@ public class DaySys {
 
         switch (foxCh){
             case 1, 2 -> System.out.println("Your chickens are fine!");
-            case 3, 4, 5, 6, 7, 8, 9 -> Fox.foxeat(eggs, chickeneat, close);
+            case 3, 4, 5, 6, 7, 8, 9 -> (new Fox()).foxeat(eggs, chickeneat, close);
         }
 
         System.out.println("Fox eats " + chickeneat + " of your chickens!");

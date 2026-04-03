@@ -1,14 +1,14 @@
 import java.util.InputMismatchException;
 import java.util.Random;
 import java.util.Scanner;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class Main {
 
     static Scanner snr = new Scanner(System.in);
     static Random rnd = new Random();
     public static int eggs = 1;
-    public static int money = 100;
-    public static int bought;
+    public static AtomicInteger money = new AtomicInteger(100);
     public static int balcalc;
     public static int sellgg;
     public static int foxCh;
@@ -19,6 +19,9 @@ public class Main {
     public static void main(String[] args) throws InterruptedException {
 
         int opt = 0;
+        Shop shop = new Shop();
+        DaySys daySys = new DaySys();
+        Hen hen = new Hen();
 
 
         do {
@@ -48,11 +51,11 @@ public class Main {
             }
 
             switch (opt){
-                case 1 -> eggs = Shop.buyEgg(eggs, money, bought, balcalc);
-                case 2 -> Shop.selleggs(sellgg, money);
-                case 3 -> Hen.feedChickens(money, saturation);
-                case 4 -> DaySys.nextDay(saturation, close, sellgg, eggs, chickeneat, foxCh);
-                case 5 -> Hen.goHen(eggs);
+                case 1 -> eggs = shop.buyEgg(eggs, money);
+                case 2 -> shop.selleggs(money, sellgg);
+                case 3 -> hen.feedChickens(money, saturation);
+                case 4 -> daySys.nextDay(saturation, close, sellgg, eggs, chickeneat, foxCh);
+                case 5 -> hen.goHen(eggs);
                 case 6 -> close();
                 default -> System.out.println("Invaild option!");
             }

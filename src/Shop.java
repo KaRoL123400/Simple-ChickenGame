@@ -1,36 +1,41 @@
+
+import java.util.concurrent.atomic.AtomicInteger;
+
 public class Shop {
 
     //shop logic
-    static int buyEgg(int eggs, int bought, int money, int balcalc) throws InterruptedException {
+    public int buyEgg(int eggs, AtomicInteger money) throws InterruptedException {
         System.out.print("How many chickens do you want?: ");
-        bought = Main.snr.nextInt();
+        int bought = Main.snr.nextInt();
+        int eggsCost = bought * 100;
 
-        while (balcalc <= money){
-            balcalc++;
+        if (bought <= 0) {
+            System.out.println("Please provide a number greater than 0");
+            return eggs;
         }
 
-        balcalc /= 100;
-
-        if(!(balcalc == bought)){
+        if (eggsCost > money.get()) {
             System.out.println("You don't have money!");
-        } else if (eggs == 3){
-            System.out.println("You can't get more chickens!");
-        } else{
-            eggs += bought;
-
-            money -= 100;
-
-            bought = 0;
-
-            Thread.sleep(1000);
+            return eggs;
         }
+
+        if (eggs >= 3){
+            System.out.println("You can't get more chickens!");
+            return eggs;
+        }
+
+        eggs += bought;
+        money.set(money.get() - eggsCost);
+        bought = 0;
+        Thread.sleep(1000);
+
         return eggs;
     }
 
     //selling eggs
-    static void selleggs(int money, int sellgg){
+    public void selleggs(AtomicInteger money, int sellgg){
 
-        money += 50 * sellgg;
+        money.set(money.get() + 50 * sellgg);
 
         sellgg = 0;
     }

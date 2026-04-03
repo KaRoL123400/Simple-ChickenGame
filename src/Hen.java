@@ -1,16 +1,18 @@
-public class Hen {
-    static void feedChickens(int money, int saturation){
+import java.util.concurrent.atomic.AtomicInteger;
 
-        if(money >= 50){
+public class Hen {
+     public void feedChickens(AtomicInteger money, int saturation){
+
+        if(money.get() >= 50){
             saturation += 1;
-            money -= 50;
+            money.set(money.get() - 50);
             System.out.println("You feed your chickens!");
         } else{
             System.out.println("You dont have money!");
         }
     }
 
-    static void goHen(int eggs){
+    public void goHen(int eggs){
         System.out.println("You have: " + eggs + " chickens");
     }
 
